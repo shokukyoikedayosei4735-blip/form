@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食品衛生責任者養成講習会 申込専用フォーム</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a4a2e; --green-mid: #2d7a4f; --green-pale: #e8f5ee;
+    --cream: #faf8f3; --gold: #c9a84c; --text-dark: #1c2826;
+    --text-mid: #4a5c52; --text-light: #7a8f84; --border: #c8ddd2;
+    --error: #c0392b; --shadow: 0 4px 24px rgba(26,74,46,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); font-family: 'Noto Sans JP', sans-serif; color: var(--text-dark); min-height: 100vh; background-image: radial-gradient(ellipse at 0% 0%, rgba(76,175,125,0.08) 0%, transparent 60%), radial-gradient(ellipse at 100% 100%, rgba(26,74,46,0.06) 0%, transparent 60%); }
+  .page-header { background: var(--green-deep); color: white; position: relative; overflow: hidden; }
+  .page-header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px); }
+  .header-inner { max-width: 720px; margin: 0 auto; padding: 40px 32px 36px; position: relative; }
+  .header-badge { display: inline-block; background: var(--gold); color: var(--green-deep); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; padding: 4px 12px; border-radius: 2px; margin-bottom: 14px; }
+  .header-title { font-family: 'Noto Serif JP', serif; font-size: clamp(18px, 4vw, 26px); font-weight: 700; line-height: 1.4; margin-bottom: 6px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.6); }
+  .container { max-width: 720px; margin: 0 auto; padding: 36px 20px 80px; }
+  .notice-top { background: white; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; font-size: 13.5px; color: var(--text-mid); line-height: 2; animation: fadeUp 0.4s ease both; }
+  .notice-top .notice-title { font-weight: 700; color: #8b6914; margin-bottom: 10px; font-size: 13px; letter-spacing: 0.08em; }
+  .notice-top table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .notice-top th { width: 110px; text-align: left; color: var(--text-light); font-weight: 500; padding: 3px 0; vertical-align: top; white-space: nowrap; }
+  .notice-top td { color: var(--text-dark); padding: 3px 0; line-height: 1.7; }
+  .notice-top .warning { margin-top: 12px; padding: 10px 14px; background: #fff5f5; border: 1px solid #f5c6c6; border-radius: 4px; color: var(--error); font-size: 12.5px; font-weight: 500; }
+  .card { background: white; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; overflow: hidden; box-shadow: var(--shadow); animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .card:nth-child(2){animation-delay:0.05s} .card:nth-child(3){animation-delay:0.10s} .card:nth-child(4){animation-delay:0.15s}
+  .field { padding: 20px 24px; border-bottom: 1px solid #f0f5f2; }
+  .field:last-child { border-bottom: none; }
+  .field-label { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .badge-req { background: var(--error); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 2px; }
+  .badge-opt { background: #dde8e2; color: var(--text-light); font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 2px; }
+  .field-hint { font-size: 12px; color: var(--text-light); margin-bottom: 10px; line-height: 1.6; }
+  input[type="text"], input[type="tel"], input[type="email"], select, textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 5px; font-size: 14px; font-family: 'Noto Sans JP', sans-serif; color: var(--text-dark); background: white; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none; }
+  input::placeholder, textarea::placeholder { color: #b8c8c0; font-size: 13px; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,122,79,0.12); }
+  .date-row { display: flex; align-items: center; gap: 8px; }
+  .date-sep { color: var(--text-light); font-size: 14px; }
+  .select-wrap { position: relative; }
+  .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--green-mid); pointer-events: none; }
+  select { padding-right: 36px; cursor: pointer; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .radio-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; padding: 9px 18px; border: 1.5px solid var(--border); border-radius: 5px; transition: all 0.15s; user-select: none; }
+  .radio-label:hover { border-color: var(--green-mid); background: var(--green-pale); }
+  input[type="radio"] { width: 16px; height: 16px; accent-color: var(--green-mid); cursor: pointer; }
+  .conditional { display: none; border-top: 1px dashed var(--border); background: #f7fbf9; }
+  .conditional.active { display: block; }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.8; }
+  .submit-area { text-align: center; margin-top: 32px; }
+  .btn-submit { background: var(--green-deep); color: white; border: none; padding: 16px 72px; font-size: 15px; font-family: 'Noto Sans JP', sans-serif; font-weight: 700; letter-spacing: 0.1em; border-radius: 6px; cursor: pointer; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(26,74,46,0.3); }
+  .btn-submit:hover { background: var(--green-mid); box-shadow: 0 6px 20px rgba(26,74,46,0.4); transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { background: #aaa; box-shadow: none; cursor: not-allowed; transform: none; }
+  .submit-note { margin-top: 12px; font-size: 12px; color: var(--text-light); }
+  .page-footer { text-align: center; padding: 24px; font-size: 11.5px; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 24px; }
+  #success-msg { display: none; text-align: center; padding: 48px 24px; }
+  @media (max-width: 480px) { .header-inner { padding: 28px 16px 24px; } .container { padding: 24px 12px 60px; } .field { padding: 16px; } }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">ONLINE APPLICATION</div>
+    <h1 class="header-title">食品衛生責任者養成講習会<br>申込専用フォーム</h1>
+    <p class="header-sub">池田食品衛生協会</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="notice-top">
+    <div class="notice-title">※ 最初に必ずお読みください ※</div>
+    <p style="margin-bottom:14px; font-size:13.5px; color:#6b5c2a;">受講票の郵送をもって受付完了とします。受講日の１日前までに書類が届かない場合は、お手数ですがご連絡ください。</p>
+    <table>
+      <tr><th>開催日</th><td>令和7年9月24日（水）</td></tr>
+      <tr><th>開催場所</th><td>徳島県立西部防災館</td></tr>
+      <tr><th>開催住所</th><td>〒771-2107　美馬市美馬町字中鳥</td></tr>
+      <tr><th>お問い合わせ</th><td>0883-72-4735（池田食品衛生協会）</td></tr>
+    </table>
+    <div class="warning">⚠ 会場である徳島県立西部防災館への直接のお問い合わせは一切お控えください。</div>
+  </div>
+
+  <!-- フォーム本体 -->
+  <div id="form-area">
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">メールアドレス <span class="badge-req">必須</span></div>
+        <div class="field-hint">回答のコピーが入力されたメールアドレスに送信されます。</div>
+        <input type="email" id="f-email" placeholder="example@email.com">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">① 氏　名 <span class="badge-req">必須</span></div>
+        <input type="text" id="f-name" placeholder="例：山田 太郎">
+      </div>
+      <div class="field">
+        <div class="field-label">② 生年月日 <span class="badge-req">必須</span></div>
+        <div class="field-hint">西暦入力でお願いします（例：1990/04/15）</div>
+        <div class="date-row">
+          <input type="text" id="dob-mm" placeholder="MM" style="max-width:70px;text-align:center;" maxlength="2">
+          <span class="date-sep">/</span>
+          <input type="text" id="dob-dd" placeholder="DD" style="max-width:70px;text-align:center;" maxlength="2">
+          <span class="date-sep">/</span>
+          <input type="text" id="dob-yyyy" placeholder="YYYY" style="max-width:90px;text-align:center;" maxlength="4">
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">③ 郵便番号 <span class="badge-req">必須</span></div>
+        <div class="field-hint">ハイフンも記載してください（例：771-2107）</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <input type="text" id="zip-home" placeholder="000-0000" style="max-width:180px;" oninput="handleZipInput(this,'addr-home','zip-home-status')">
+          <span id="zip-home-status" style="font-size:12px;color:var(--text-light);"></span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">④ 住　所 <span class="badge-req">必須</span></div>
+        <div class="field-hint">番地・建物名は手入力で追記してください。</div>
+        <input type="text" id="addr-home" placeholder="例：徳島県美馬市○○町1-2-3">
+      </div>
+      <div class="field">
+        <div class="field-label">⑤ 電話番号 <span class="badge-req">必須</span></div>
+        <div class="field-hint">携帯電話可</div>
+        <input type="tel" id="f-tel" placeholder="例：090-0000-0000" style="max-width:260px;">
+      </div>
+      <div class="field">
+        <div class="field-label">⑥ FAX <span class="badge-opt">任意</span></div>
+        <input type="tel" id="f-fax" placeholder="例：088-000-0000" style="max-width:260px;">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">⑦ 現在、食品営業許可を取得していますか？ <span class="badge-opt">任意</span></div>
+        <div class="field-hint">食品営業許可を取得されていない方は、設問⑫までお進みください。</div>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="license" value="許可を取得している" onchange="toggleLicense(true)"><span>許可を取得している</span></label>
+          <label class="radio-label"><input type="radio" name="license" value="許可は取得していない" onchange="toggleLicense(false)"><span>許可は取得していない</span></label>
+        </div>
+      </div>
+      <div class="conditional" id="licenseFields">
+        <div class="field">
+          <div class="field-label">食品営業許可業種名 <span class="badge-opt">任意</span></div>
+          <div class="select-wrap">
+            <select id="f-license-type">
+              <option value="">選択してください</option>
+              <option>飲食店営業</option><option>露店飲食店営業</option><option>自動車による飲食店営業</option>
+              <option>食肉販売業</option><option>食肉処理業</option><option>食肉製品製造業</option>
+              <option>魚介類販売業</option><option>乳製品製造業</option><option>菓子製造業</option>
+              <option>アイスクリーム製造業</option><option>みそ又はしょうゆ製造業</option><option>豆腐製造業</option>
+              <option>めん類製造業</option><option>そうざい製造業</option><option>漬物製造業</option>
+              <option>酒類製造業</option><option>納豆製造業</option><option>密封包装食品製造業</option>
+              <option>清涼飲料水製造業</option><option>食用油脂製造業</option><option>食品の小分け業</option>
+              <option>添加物製造業</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">⑧ 営業所名 <span class="badge-opt">任意</span></div>
+          <input type="text" id="f-office-name" placeholder="例：○○食堂">
+        </div>
+        <div class="field">
+          <div class="field-label">⑨ 郵便番号（営業所） <span class="badge-opt">任意</span></div>
+          <div class="field-hint">ハイフンも記載してください</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <input type="text" id="zip-office" placeholder="000-0000" style="max-width:180px;" oninput="handleZipInput(this,'addr-office','zip-office-status')">
+            <span id="zip-office-status" style="font-size:12px;color:var(--text-light);"></span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">⑩ 住所（営業所） <span class="badge-opt">任意</span></div>
+          <div class="field-hint">番地・建物名は手入力で追記してください。</div>
+          <input type="text" id="addr-office" placeholder="例：徳島県○○市○○町1-2-3">
+        </div>
+        <div class="field">
+          <div class="field-label">⑪ 電話番号（営業所） <span class="badge-opt">任意</span></div>
+          <input type="tel" id="f-office-tel" placeholder="例：088-000-0000" style="max-width:260px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">⑫ 受講票郵送先 <span class="badge-req">必須</span></div>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="mailTo" value="自宅"><span>自宅</span></label>
+          <label class="radio-label"><input type="radio" name="mailTo" value="営業所"><span>営業所</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">⑬ 備　考 <span class="badge-opt">任意</span></div>
+        <div class="field-hint">領収書の宛名にご希望がある場合はご記入ください。原則として受講者ご本人様のお名前で発行しています。</div>
+        <textarea id="f-note" placeholder="例：領収書の宛名は「○○株式会社」でお願いします。"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="button" id="submit-btn" onclick="submitToGoogle()" class="btn-submit">申込内容を送信する</button>
+      <p class="submit-note">送信後、入力されたメールアドレスに回答のコピーが届きます。</p>
+    </div>
+
+  </div>
+
+  <!-- 送信完了メッセージ -->
+  <div id="success-msg">
+    <div style="font-size:52px;margin-bottom:16px;">✅</div>
+    <div style="font-family:'Noto Serif JP',serif;font-size:20px;font-weight:700;color:var(--green-deep);margin-bottom:14px;">申込を受け付けました</div>
+    <div style="font-size:14px;color:var(--text-mid);line-height:2;">
+      ご登録いただいたメールアドレスに確認メールをお送りします。<br>
+      受講票は郵送にてお届けします。<br>
+      受講日の前日までに届かない場合は<br>
+      <strong>0883-72-4735（池田食品衛生協会）</strong>までご連絡ください。
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  池田食品衛生協会　｜　Tel: 0883-72-4735　｜　受付時間: 平日 9:00〜17:00<br>
+  <span style="font-size:11px;">このフォームはGoogleが作成または保証するものではありません。</span>
+</footer>
+
+<script>
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSf5ZFqJ9nkR0eZsy2u6fbDaGHHJVbc3xBH1XW55hkoj6Tcnpg/formResponse';
+  const ENTRY = {
+    email:       'emailAddress',
+    name:        'entry.1119306457',
+    dob:         'entry.1643027204',
+    zip:         'entry.1052507833',
+    address:     'entry.1092886650',
+    tel:         'entry.1704730849',
+    fax:         'entry.1415499150',
+    license:     'entry.1132045150',
+    licenseType: 'entry.1465944187',
+    officeName:  'entry.84379158',
+    officeZip:   'entry.207396111',
+    officeAddr:  'entry.798280854',
+    officeTel:   'entry.1730967436',
+    mailTo:      'entry.1873816709',
+    note:        'entry.1479521427',
+  };
+
+  function submitToGoogle() {
+    const email   = document.getElementById('f-email').value.trim();
+    const name    = document.getElementById('f-name').value.trim();
+    const mm      = document.getElementById('dob-mm').value.trim();
+    const dd      = document.getElementById('dob-dd').value.trim();
+    const yyyy    = document.getElementById('dob-yyyy').value.trim();
+    const zip     = document.getElementById('zip-home').value.trim();
+    const address = document.getElementById('addr-home').value.trim();
+    const tel     = document.getElementById('f-tel').value.trim();
+    const mailTo  = document.querySelector('input[name="mailTo"]:checked');
+
+    if (!email || !name || !mm || !dd || !yyyy || !zip || !address || !tel || !mailTo) {
+      alert('必須項目（メールアドレス・氏名・生年月日・郵便番号・住所・電話番号・受講票郵送先）をすべて入力してください。');
+      return;
+    }
+
+    const dob = yyyy + '-' + mm.padStart(2,'0') + '-' + dd.padStart(2,'0');
+    const licenseVal = document.querySelector('input[name="license"]:checked');
+
+    const params = new URLSearchParams();
+    params.append(ENTRY.email,       email);
+    params.append(ENTRY.name,        name);
+    params.append(ENTRY.dob,         dob);
+    params.append(ENTRY.zip,         zip);
+    params.append(ENTRY.address,     address);
+    params.append(ENTRY.tel,         tel);
+    params.append(ENTRY.fax,         document.getElementById('f-fax').value.trim());
+    params.append(ENTRY.license,     licenseVal ? licenseVal.value : '');
+    params.append(ENTRY.licenseType, document.getElementById('f-license-type').value);
+    params.append(ENTRY.officeName,  document.getElementById('f-office-name').value.trim());
+    params.append(ENTRY.officeZip,   document.getElementById('zip-office').value.trim());
+    params.append(ENTRY.officeAddr,  document.getElementById('addr-office').value.trim());
+    params.append(ENTRY.officeTel,   document.getElementById('f-office-tel').value.trim());
+    params.append(ENTRY.mailTo,      mailTo.value);
+    params.append(ENTRY.note,        document.getElementById('f-note').value.trim());
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+
+    // iframeを使ってCORSを回避しながらGoogleフォームに送信
+    const iframe = document.createElement('iframe');
+    iframe.name = 'gform-iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = FORM_ACTION;
+    form.target = 'gform-iframe';
+    params.forEach((val, key) => {
+      const inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = key; inp.value = val;
+      form.appendChild(inp);
+    });
+    document.body.appendChild(form);
+    form.submit();
+
+    setTimeout(() => {
+      document.getElementById('form-area').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2000);
+  }
+
+  function toggleLicense(show) {
+    document.getElementById('licenseFields').classList.toggle('active', show);
+  }
+
+  let zipTimers = {};
+  function handleZipInput(inputEl, addrId, statusId) {
+    const raw = inputEl.value.replace(/[－―ー−]/g, '-').replace(/[^\d-]/g, '');
+    inputEl.value = raw;
+    const statusEl = document.getElementById(statusId);
+    const digits = raw.replace(/-/g, '');
+    if (digits.length === 7) {
+      clearTimeout(zipTimers[statusId]);
+      zipTimers[statusId] = setTimeout(() => fetchAddress(digits, addrId, statusEl), 300);
+    } else {
+      statusEl.textContent = '';
+    }
+  }
+  async function fetchAddress(digits, addrId, statusEl) {
+    statusEl.textContent = '検索中…';
+    statusEl.style.color = 'var(--text-light)';
+    try {
+      const res = await fetch('https://zipcloud.ibsnet.co.jp/api/search?zipcode=' + digits);
+      const data = await res.json();
+      if (data.results && data.results.length > 0) {
+        const r = data.results[0];
+        const address = r.address1 + r.address2 + r.address3;
+        const addrEl = document.getElementById(addrId);
+        addrEl.value = address;
+        addrEl.focus();
+        addrEl.setSelectionRange(address.length, address.length);
+        statusEl.textContent = '✓ 住所を自動入力しました';
+        statusEl.style.color = 'var(--green-mid)';
+      } else {
+        statusEl.textContent = '該当する住所が見つかりませんでした';
+        statusEl.style.color = 'var(--error)';
+      }
+    } catch(e) {
+      statusEl.textContent = '通信エラーが発生しました';
+      statusEl.style.color = 'var(--error)';
+    }
+  }
+</script>
+</body>
+</html>
