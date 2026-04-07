@@ -110,10 +110,118 @@
   .page-footer { text-align: center; padding: 24px; font-size: 11.5px; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 24px; }
   #success-msg { display: none; text-align: center; padding: 48px 24px; }
   @media (max-width: 480px) { .header-inner { padding: 28px 16px 24px; } .container { padding: 24px 12px 60px; } .field { padding: 16px; } }
+
+  /* モーダル */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(26,42,74,0.6);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal-box {
+    background: white;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 40px rgba(26,42,74,0.3);
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-header {
+    background: linear-gradient(135deg, #1a3a6b, #2c5aa0);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 10px 10px 0 0;
+    position: sticky; top: 0;
+  }
+  .modal-header h2 { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .modal-header p { font-size: 12px; color: rgba(255,255,255,0.75); }
+  .modal-body { padding: 24px; }
+  .modal-intro { font-size: 14px; color: var(--text-dark); line-height: 1.9; margin-bottom: 20px; padding: 14px 18px; background: #f0f4fa; border-radius: 6px; border-left: 4px solid #2c5aa0; }
+  .modal-section { margin-bottom: 20px; }
+  .modal-section-title { font-size: 14px; font-weight: 700; color: #1a3a6b; margin-bottom: 10px; padding: 6px 12px; background: #e8eef8; border-radius: 4px; }
+  .modal-section p { font-size: 13.5px; color: var(--text-dark); line-height: 1.9; }
+  .modal-bank { background: #f8f9fc; border: 1px solid #d0d8e8; border-radius: 6px; padding: 14px 18px; margin: 10px 0; font-size: 13.5px; line-height: 2; }
+  .modal-bank strong { color: #1a3a6b; }
+  .modal-notes { font-size: 12.5px; color: var(--text-mid); line-height: 1.9; margin-top: 8px; }
+  .modal-notes li { margin-bottom: 4px; list-style: none; padding-left: 1em; text-indent: -1em; }
+  .modal-paypay { background: #fff8f0; border: 1px solid #f0d0a0; border-radius: 6px; padding: 14px 18px; margin: 10px 0; font-size: 13.5px; line-height: 2; }
+  .modal-paypay strong { color: #c0392b; }
+  .modal-cash { background: #f0f8f0; border: 1px solid #a0d0a0; border-radius: 6px; padding: 12px 18px; margin-top: 16px; font-size: 13px; color: #2d7a4f; font-weight: 500; }
+  .modal-footer { padding: 16px 24px; border-top: 1px solid #e8eef5; text-align: center; }
+  .modal-close-btn {
+    background: linear-gradient(135deg, #1a3a6b, #2c5aa0);
+    color: white; border: none;
+    padding: 12px 48px; font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700; border-radius: 6px; cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(26,58,107,0.3);
+  }
+  .modal-close-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(26,58,107,0.4); }
 </style>
 </head>
 <body>
 
+
+<!-- 受講料案内モーダル -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>💳 受講料のお支払いについて（お願い）</h2>
+      <p>申込前に必ずご確認ください</p>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-intro">
+        本講習会の受講料は<strong>7,000円</strong>となっております。<br>
+        受付にかかる時間や待機時間の短縮のため、<strong>①銀行振込</strong> または <strong>②PayPayによる電子決済</strong>での事前払いを推奨しております。<br>
+        大変お手数をおかけいたしますが、趣旨をご理解のうえ、ご協力くださいますようお願い申し上げます。
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">① 銀行振込の場合</div>
+        <p>お振込は下記口座へお願いいたします。</p>
+        <div class="modal-bank">
+          <strong>銀行名</strong>　　阿波銀行<br>
+          <strong>支店名</strong>　　池田支店<br>
+          <strong>口座番号</strong>　（普）0877025<br>
+          <strong>口座名義</strong>　徳島県池田食品衛生協会
+        </div>
+        <ul class="modal-notes">
+          <li>※ 当日は、ご利用明細書をご持参ください。</li>
+          <li>※ 振込名義は、必ず受講者のフルネームでお願いいたします。</li>
+          <li>※ 恐れ入りますが、振込手数料はお客様のご負担でお願いいたします。</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">② PayPayによるご送金の場合</div>
+        <p>PayPay IDを検索のうえ、ご送金ください。</p>
+        <div class="modal-paypay">
+          <strong>PayPay ID：ikedasyokyo4735</strong>（池田食品衛生協会）
+        </div>
+        <ul class="modal-notes">
+          <li>※ 送金の際は、メッセージ欄に申込日と受講者フルネームをご記入ください。</li>
+          <li>　（例：令和8年4月1日　イケダタロウ）</li>
+        </ul>
+      </div>
+
+      <div class="modal-cash">
+        ✅ なお、例年どおり受付時の現金でのお支払いも可能ですので、ご安心ください。
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="modal-close-btn" onclick="closeModal()">確認しました　→　申込フォームへ</button>
+    </div>
+  </div>
+</div>
 <header class="page-header">
   <div class="header-inner">
     <div class="header-top-line">
@@ -156,7 +264,8 @@
     <div class="card">
       <div class="field">
         <div class="field-label">① 氏　名 <span class="badge-req">必須</span></div>
-        <input type="text" id="f-name" placeholder="例：山田 太郎">
+        <div class="field-hint">苗字と名前の間に一文字分の空白を入れてください。</div>
+        <input type="text" id="f-name" placeholder="例：山田　太郎">
       </div>
       <div class="field">
         <div class="field-label">② 生年月日 <span class="badge-req">必須</span></div>
@@ -246,7 +355,22 @@
         </div>
       </div>
       <div class="field">
-        <div class="field-label">⑬ 備　考 <span class="badge-opt">任意</span></div>
+        <div class="field-label">⑬ ネームプレート注文 <span class="badge-opt">任意</span></div>
+        <div class="field-hint" style="line-height:1.9;">
+          食品衛生責任者ネームプレート（掲示用）の注文を受け付けております。<br>
+          料金は <strong>1,250円（郵送料含む）</strong> です。<br>
+          ご希望の方は受講料（7,000円）と合計 <strong>8,250円</strong> をお支払いください。商品は後日発送いたします。
+        </div>
+        <div class="radio-group">
+          <label class="check-label" style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13.5px;padding:9px 18px;border:1.5px solid var(--border);border-radius:5px;transition:all 0.15s;user-select:none;">
+            <input type="checkbox" id="nameplate" style="width:16px;height:16px;accent-color:#2c5aa0;cursor:pointer;">
+            <span>注文する（1,250円）</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">⑭ 備　考 <span class="badge-opt">任意</span></div>
         <div class="field-hint">領収書の宛名にご希望がある場合はご記入ください。原則として受講者ご本人様のお名前で発行しています。</div>
         <textarea id="f-note" placeholder="例：領収書の宛名は「○○株式会社」でお願いします。"></textarea>
       </div>
@@ -265,11 +389,11 @@
     <div style="font-family:'Noto Serif JP',serif;font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:20px;">申込を受け付けました</div>
 
     <div style="background:#fffbf0;border:2px solid #c9a84c;border-radius:8px;padding:24px 28px;max-width:560px;margin:0 auto 24px;text-align:left;">
-      <div style="font-size:15px;font-weight:700;color:#8b6914;margin-bottom:14px;text-align:center;">※ 重要 ※ ご確認ください</div>
+      <div style="font-size:15px;font-weight:700;color:#c0392b;margin-bottom:14px;text-align:center;">※ 重要 ※ ご確認ください</div>
       <p style="font-size:14px;color:var(--text-dark);line-height:2;">
         この度は、食品衛生責任者養成講習会にお申込みいただき、誠にありがとうございます。<br>
         お申し込みを受付いたしました。<br>
-        <strong>個別での申し込み確認は対応しておりません。</strong><br>
+        <strong style="color:#c0392b;">原則個別での申し込み確認は対応しておりません。</strong><br>
         受講日の一週間前までに受講票が届かない場合は、お手数ですが下記の協会事務局までご連絡をお願いいたします。
       </p>
     </div>
@@ -332,8 +456,12 @@
     formData.append('⑨郵便番号（営業所）',    document.getElementById('zip-office').value.trim());
     formData.append('⑩住所（営業所）',       document.getElementById('addr-office').value.trim());
     formData.append('⑪電話番号（営業所）',    document.getElementById('f-office-tel').value.trim());
+    const nameplate = document.getElementById('nameplate');
+    formData.append('⑬ネームプレート注文',     nameplate.checked ? '希望する' : '希望しない');
     formData.append('⑫受講票郵送先',         mailTo.value);
-    formData.append('⑬備考',                document.getElementById('f-note').value.trim());
+    formData.append('⑬ネームプレート注文',      document.getElementById('f-nameplate').checked ? '注文する（1,250円）' : '注文しない');
+    formData.append('⑬ネームプレート注文',    document.getElementById('f-nameplate').checked ? '希望する（＋1,250円）' : '希望しない');
+    formData.append('⑭備考',                document.getElementById('f-note').value.trim());
     formData.append('_replyto',              email);
     formData.append('_subject',              '【食品衛生責任者養成講習会】申込を受け付けました');
 
@@ -359,6 +487,10 @@
     }
   }
 
+
+  function closeModal() {
+    document.getElementById('payment-modal').style.display = 'none';
+  }
   function toggleLicense(show) {
     document.getElementById('licenseFields').classList.toggle('active', show);
   }
