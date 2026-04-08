@@ -358,13 +358,13 @@
         <div class="field-label">⑬ ネームプレート注文 <span class="badge-opt">任意</span></div>
         <div class="field-hint" style="line-height:1.9;">
           食品衛生責任者ネームプレート（掲示用）の注文を受け付けております。<br>
-          料金は <strong>1,250円（郵送料含む）</strong> です。<br>
-          ご希望の方は受講料（7,000円）と合計 <strong>8,250円</strong> をお支払いください。商品は後日発送いたします。
+          料金は <strong>1,000円（郵送料含む）</strong> です。<br>
+          ご希望の方は受講料（7,000円）と合計 <strong>8,000円</strong> をお支払いください。商品は後日発送いたします。
         </div>
         <div class="radio-group">
           <label class="check-label" style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13.5px;padding:9px 18px;border:1.5px solid var(--border);border-radius:5px;transition:all 0.15s;user-select:none;">
             <input type="checkbox" id="f-nameplate" style="width:16px;height:16px;accent-color:#2c5aa0;cursor:pointer;">
-            <span>注文する（1,250円）</span>
+            <span>注文する（1,000円）</span>
           </label>
         </div>
       </div>
@@ -501,8 +501,6 @@
     formData.append('⑨郵便番号（営業所）',    document.getElementById('zip-office').value.trim());
     formData.append('⑩住所（営業所）',       document.getElementById('addr-office').value.trim());
     formData.append('⑪電話番号（営業所）',    document.getElementById('f-office-tel').value.trim());
-    const nameplate = document.getElementById('nameplate');
-    formData.append('⑬ネームプレート注文',     nameplate.checked ? '希望する' : '希望しない');
     formData.append('⑫受講票郵送先',         mailTo.value);
     formData.append('⑬ネームプレート注文', document.getElementById('f-nameplate').checked ? '希望する（＋1,250円）' : '希望しない');
     formData.append('⑭備考',                document.getElementById('f-note').value.trim());
