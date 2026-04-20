@@ -355,7 +355,26 @@
         </div>
       </div>
       <div class="field">
-        <div class="field-label">⑬ ネームプレート注文 <span class="badge-opt">任意</span></div>
+        <div class="field-label">⑬ 支払方法 <span class="badge-req">必須</span></div>
+        <div class="field-hint">お支払い方法を選択してください。</div>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="payment" value="銀行振込" onchange="togglePaymentNote(this)"><span>銀行振込</span></label>
+          <label class="radio-label"><input type="radio" name="payment" value="PayPay送金" onchange="togglePaymentNote(this)"><span>PayPay送金</span></label>
+          <label class="radio-label"><input type="radio" name="payment" value="現金支払" onchange="togglePaymentNote(this)"><span>現金支払</span></label>
+        </div>
+        <div id="payment-note" style="display:none;margin-top:12px;padding:12px 16px;background:#fff8f0;border:1px solid #f0c070;border-radius:5px;font-size:13px;color:#8b6000;line-height:1.8;">
+          ⚠ 「銀行振込」「PayPay送金」を選択された場合、受講票と領収書はお支払いが確認できた後に発送いたします。<strong>支払いが確認できない場合は発送できません</strong>のでご注意ください。
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">⑬-2 支払予定日 <span class="badge-req">必須</span></div>
+        <div class="field-hint">カレンダーからお支払い予定日を選択してください。（受講票発送のため、<strong>6月12日まで</strong>にお支払いをお願いします）</div>
+        <input type="date" id="f-payment-date" min="2026-04-20" max="2026-06-12" style="max-width:220px;">
+      </div>
+
+      <div class="field">
+        <div class="field-label">⑭ ネームプレート注文 <span class="badge-opt">任意</span></div>
         <div class="field-hint" style="line-height:1.9;">
           食品衛生責任者ネームプレート（掲示用）の注文を受け付けております。<br>
           料金は <strong>1,000円（郵送料含む）</strong> です。<br>
@@ -370,7 +389,7 @@
       </div>
 
       <div class="field">
-        <div class="field-label">⑭ 備　考 <span class="badge-opt">任意</span></div>
+        <div class="field-label">⑮ 備　考 <span class="badge-opt">任意</span></div>
         <div class="field-hint">領収書の宛名にご希望がある場合はご記入ください。原則として受講者ご本人様のお名前で発行しています。</div>
         <textarea id="f-note" placeholder="例：領収書の宛名は「○○株式会社」でお願いします。"></textarea>
       </div>
@@ -479,9 +498,19 @@
     const address = document.getElementById('addr-home').value.trim();
     const tel     = document.getElementById('f-tel').value.trim();
     const mailTo  = document.querySelector('input[name="mailTo"]:checked');
+    const payment = document.querySelector('input[name="payment"]:checked');
+    const paymentDate = document.getElementById('f-payment-date').value.trim();
 
     if (!email || !name || !dob_input || !zip || !address || !tel || !mailTo) {
       alert('必須項目（メールアドレス・氏名・生年月日・郵便番号・住所・電話番号・受講票郵送先）をすべて入力してください。');
+      return;
+    }
+    if (!payment) {
+      alert('⑬ 支払方法を選択してください。');
+      return;
+    }
+    if (!paymentDate) {
+      alert('⑬-2 支払予定日を入力してください。');
       return;
     }
 
@@ -507,8 +536,10 @@
     formData.append('⑩住所（営業所）',       document.getElementById('addr-office').value.trim());
     formData.append('⑪電話番号（営業所）',    document.getElementById('f-office-tel').value.trim());
     formData.append('⑫受講票郵送先',         mailTo.value);
-    formData.append('⑬ネームプレート注文', document.getElementById('f-nameplate').checked ? '希望する（＋1,000円）' : '希望しない');
-    formData.append('⑭備考',                document.getElementById('f-note').value.trim());
+    formData.append('⑬支払方法',              payment ? payment.value : '');
+    formData.append('⑬支払予定日',            paymentDate);
+    formData.append('⑭ネームプレート注文', document.getElementById('f-nameplate').checked ? '希望する（＋1,000円）' : '希望しない');
+    formData.append('⑮備考',                document.getElementById('f-note').value.trim());
     formData.append('_replyto',              email);
     formData.append('_subject',              '【食品衛生責任者養成講習会】申込を受け付けました');
 
@@ -540,6 +571,15 @@
   function closeModal() {
     document.getElementById('payment-modal').style.display = 'none';
   }
+  function togglePaymentNote(radio) {
+    const note = document.getElementById('payment-note');
+    if (radio.value === '銀行振込' || radio.value === 'PayPay送金') {
+      note.style.display = 'block';
+    } else {
+      note.style.display = 'none';
+    }
+  }
+
   function toggleLicense(show) {
     document.getElementById('licenseFields').classList.toggle('active', show);
   }
