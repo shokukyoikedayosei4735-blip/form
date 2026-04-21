@@ -367,7 +367,7 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" id="payment-date-field" style="display:none;">
         <div class="field-label">⑬-2 支払予定日 <span class="badge-req">必須</span></div>
         <div class="field-hint">カレンダーからお支払い予定日を選択してください。（受講票発送のため、<strong>6月12日まで</strong>にお支払いをお願いします）</div>
         <input type="date" id="f-payment-date" min="2026-04-20" max="2026-06-12" style="max-width:220px;">
@@ -509,7 +509,7 @@
       alert('⑬ 支払方法を選択してください。');
       return;
     }
-    if (!paymentDate) {
+    if (payment.value !== '現金支払' && !paymentDate) {
       alert('⑬-2 支払予定日を入力してください。');
       return;
     }
@@ -573,10 +573,17 @@
   }
   function togglePaymentNote(radio) {
     const note = document.getElementById('payment-note');
+    const dateField = document.getElementById('payment-date-field');
+    const dateInput = document.getElementById('f-payment-date');
     if (radio.value === '銀行振込' || radio.value === 'PayPay送金') {
       note.style.display = 'block';
+      dateField.style.display = 'block';
+      dateInput.value = '';
     } else {
+      // 現金支払：非表示にして自動的に6月19日をセット
       note.style.display = 'none';
+      dateField.style.display = 'none';
+      dateInput.value = '2026-06-19';
     }
   }
 
