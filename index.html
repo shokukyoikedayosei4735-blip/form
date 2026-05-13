@@ -182,7 +182,7 @@
         本講習会の受講料は<strong>7,000円</strong>となっております。<br><br>
         当日は少人数で受付対応を行うため、受付にお時間をいただく場合があり、受講者の皆様をお待たせする恐れがございます。<br>
         そのため、<strong style="color:#c0392b;">池田食品衛生協会では、原則として現金でのお支払いの取り扱いを停止しております。</strong><br><br>
-        受付混雑緩和および待機時間短縮のため、<strong style="color:#c0392b;">①銀行振込 または ②PayPayによる電子決済での事前払い</strong>にご協力をお願いいたします。<br><br>
+        当日の受付混雑緩和および待機時間短縮のため、<strong style="color:#c0392b;">①銀行振込 または ②PayPayによる電子決済での事前払い</strong>にご協力をお願いいたします。<br><br>
         大変お手数をおかけいたしますが、趣旨をご理解のうえ、ご協力くださいますようお願い申し上げます。<br><br>
         なお、やむを得ず現金でのお支払いをご希望の場合は、事前に事務局までご連絡ください。<br><br>
         <span style="color:#c0392b;font-size:12.5px;">※5月1日までに「現金支払い」でお申し込みいただいた方につきましては、別途ご連絡いたします。</span>
@@ -367,14 +367,14 @@
           <label class="radio-label"><input type="radio" name="payment" value="PayPay送金" onchange="togglePaymentNote(this)"><span>PayPay送金</span></label>
         </div>
         <div id="payment-note" style="display:none;margin-top:12px;padding:12px 16px;background:#fff8f0;border:1px solid #f0c070;border-radius:5px;font-size:13px;color:#8b6000;line-height:1.8;">
-          ⚠ 「銀行振込」「PayPay送金」を選択された場合、受講票と領収書はお支払いが確認できた後に発送いたします。<strong>支払いが確認できない場合は発送できません</strong>のでご注意ください。
+          ⚠ 受講票と領収書はお支払いが確認できた後に発送いたします。<strong>支払いが確認できない場合は発送できません</strong>のでご注意ください。
         </div>
       </div>
 
       <div class="field" id="payment-date-field" style="display:none;">
         <div class="field-label">⑬-2 支払予定日 <span class="badge-req">必須</span></div>
-        <div class="field-hint">カレンダーからお支払い予定日を選択してください。（受講票発送のため、<strong>6月12日まで</strong>にお支払いをお願いします）</div>
-        <input type="date" id="f-payment-date" min="2026-04-20" max="2026-06-12" style="max-width:220px;">
+        <div class="field-hint">カレンダーからお支払い予定日を選択してください。（申し込みから<strong>1週間以内</strong>にお支払いをお願いします）</div>
+        <input type="date" id="f-payment-date" style="max-width:220px;">
       </div>
 
       <div class="field">
@@ -513,11 +513,11 @@
       return;
     }
     if (!payment) {
-      alert('⑬ 支払方法を選択してください。');
+      alert('⑬ 支払方法を選択してください。\n「銀行振込」または「PayPay送金」を選択してください。');
       return;
     }
     if (!paymentDate) {
-      alert('⑬-2 支払予定日を入力してください。');
+      alert('⑬-2 支払予定日を選択してください。\n申し込みから1週間以内の日付を選択してください。');
       return;
     }
 
@@ -585,7 +585,25 @@
     note.style.display = 'block';
     dateField.style.display = 'block';
     dateInput.value = '';
+    // 今日から1週間を選択範囲に設定
+    const today = new Date();
+    const oneWeek = new Date(today);
+    oneWeek.setDate(today.getDate() + 7);
+    dateInput.min = today.toISOString().split('T')[0];
+    dateInput.max = oneWeek.toISOString().split('T')[0];
   }
+
+  // ページ読み込み時にも範囲を設定
+  window.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('f-payment-date');
+    if (dateInput) {
+      const today = new Date();
+      const oneWeek = new Date(today);
+      oneWeek.setDate(today.getDate() + 7);
+      dateInput.min = today.toISOString().split('T')[0];
+      dateInput.max = oneWeek.toISOString().split('T')[0];
+    }
+  });
 
   function toggleLicense(show) {
     document.getElementById('licenseFields').classList.toggle('active', show);
