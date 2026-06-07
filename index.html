@@ -221,6 +221,27 @@
         
       </div>
 
+      <div style="margin-top:16px;padding:16px 18px;background:#f8f9fc;border:1px solid #d0d8e8;border-radius:6px;font-size:13px;line-height:2;">
+        <div style="font-weight:700;color:#1a3a6b;margin-bottom:10px;">【受講料のお支払いについて（重要）】</div>
+        <p style="margin-bottom:10px;">本講習会の受講料は<strong>7,000円</strong>となっております。<br>
+        お申し込みの際は、<strong>当日中にお支払い</strong>をお願いいたします。<br><br>
+        お申し込みの時期により、受講票・領収書のお渡し方法が異なります。</p>
+
+        <p style="margin-bottom:8px;">
+          <strong style="color:#c0392b;">■ 6月12日（金）までにお申し込みの方</strong><br>
+          受講票および領収書は<strong style="color:#c0392b;">郵送</strong>にてお送りいたします。<br>
+          お支払い確認後、順次発送いたします。
+        </p>
+
+        <p style="margin-bottom:8px;">
+          <strong style="color:#c0392b;">■ 6月13日（土）〜6月18日（木）までにお申し込みの方</strong><br>
+          郵送での発送が間に合わないため、受講票および領収書は<strong style="color:#c0392b;">当日会場にてお渡し</strong>いたします。<br>
+          ※当日受付にてお名前をお申し出ください。
+        </p>
+
+        <p>いずれの場合も、<strong>お申し込み当日中</strong>に①銀行振込または②PayPay送金にてお支払いください。<br>
+        <strong style="color:#c0392b;">支払いが確認できない場合は、受講票の発送・当日お渡しができませんのでご注意ください。</strong></p>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="modal-close-btn" onclick="closeModal()">確認しました　→　申込フォームへ</button>
@@ -254,6 +275,28 @@
       <tr><th>お問い合わせ</th><td>0883-72-4735（池田食品衛生協会）</td></tr>
     </table>
     <div class="warning">⚠ 会場である徳島県立西部防災館への直接のお問い合わせは一切お控えください。</div>
+
+    <div style="margin-top:16px;padding:16px 18px;background:#f8f9fc;border:1px solid #d0d8e8;border-radius:6px;font-size:13.5px;line-height:2;">
+      <div style="font-weight:700;color:#1a3a6b;margin-bottom:10px;">【受講料のお支払いについて（重要）】</div>
+      <p style="margin-bottom:10px;">本講習会の受講料は<strong>7,000円</strong>となっております。<br>
+      お申し込みの際は、<strong>当日中にお支払い</strong>をお願いいたします。<br><br>
+      お申し込みの時期により、受講票・領収書のお渡し方法が異なります。</p>
+
+      <p style="margin-bottom:8px;">
+        <strong style="color:#c0392b;">■ 6月12日（金）までにお申し込みの方</strong><br>
+        受講票および領収書は<strong style="color:#c0392b;">郵送</strong>にてお送りいたします。<br>
+        お支払い確認後、順次発送いたします。
+      </p>
+
+      <p style="margin-bottom:8px;">
+        <strong style="color:#c0392b;">■ 6月13日（土）〜6月18日（木）までにお申し込みの方</strong><br>
+        郵送での発送が間に合わないため、受講票および領収書は<strong style="color:#c0392b;">当日会場にてお渡し</strong>いたします。<br>
+        ※当日受付にてお名前をお申し出ください。
+      </p>
+
+      <p>いずれの場合も、<strong>お申し込み当日中</strong>に①銀行振込または②PayPay送金にてお支払いください。<br>
+      <strong style="color:#c0392b;">支払いが確認できない場合は、受講票の発送・当日お渡しができませんのでご注意ください。</strong></p>
+    </div>
   </div>
 
   <!-- フォーム本体 -->
@@ -375,6 +418,31 @@
         <div class="field-label">⑬-2 支払予定日 <span class="badge-req">必須</span></div>
         <div class="field-hint">カレンダーからお支払い予定日を選択してください。（申し込みから<strong>1週間以内</strong>にお支払いをお願いします）</div>
         <input type="date" id="f-payment-date" style="max-width:220px;">
+
+        <!-- 申込日と支払い案内 -->
+        <div id="payment-info-box" style="margin-top:16px;background:#f0f4fa;border:1px solid #d0d8e8;border-left:4px solid #2c5aa0;border-radius:6px;padding:16px 20px;font-size:13.5px;line-height:2;">
+          <div style="font-weight:700;color:#1a3a6b;margin-bottom:8px;">📅 本日の申込日：<span id="today-date-display" style="color:#c0392b;"></span></div>
+          <div style="color:#c0392b;font-weight:700;margin-bottom:14px;">⚠ 本日中にお支払いください。</div>
+          <div style="font-weight:700;color:#1a3a6b;margin-bottom:10px;">【お支払い方法】</div>
+          <div style="margin-bottom:12px;">
+            <div style="font-weight:600;color:#1a3a6b;margin-bottom:4px;">① 銀行振込</div>
+            <div style="background:white;border:1px solid #d0d8e8;border-radius:4px;padding:10px 14px;font-size:13px;line-height:2;">
+              銀行名　　阿波銀行<br>
+              支店名　　池田支店<br>
+              口座番号　（普）0880541<br>
+              口座名義　徳島県池田食品衛生協会<br>
+              <span style="color:#4a5270;font-size:12px;">※ 振込名義は受講者のフルネームでお願いします</span><br>
+              <span style="color:#4a5270;font-size:12px;">※ 振込手数料はお客様のご負担でお願いいたします</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:#1a3a6b;margin-bottom:4px;">② PayPay送金（推奨）<span style="font-size:12px;color:#2d7a4f;margin-left:6px;">💡 振込手数料不要</span></div>
+            <div style="background:#fff8f0;border:1px solid #f0d0a0;border-radius:4px;padding:10px 14px;font-size:13px;line-height:2;">
+              PayPay ID：<strong style="color:#c0392b;">ikedasyokyo4735</strong>（池田食品衛生協会）<br>
+              <span style="color:#4a5270;font-size:12px;">※ メッセージ欄に申込日と受講者フルネームをご記入ください</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="field">
@@ -591,6 +659,14 @@
     oneWeek.setDate(today.getDate() + 7);
     dateInput.min = today.toISOString().split('T')[0];
     dateInput.max = oneWeek.toISOString().split('T')[0];
+    // 申込日を日本語で表示
+    const y = today.getFullYear();
+    const m = today.getMonth() + 1;
+    const d = today.getDate();
+    const weekdays = ['日','月','火','水','木','金','土'];
+    const w = weekdays[today.getDay()];
+    document.getElementById('today-date-display').textContent =
+      y + '年' + m + '月' + d + '日（' + w + '）';
   }
 
   // ページ読み込み時にも範囲を設定
